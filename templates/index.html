@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wine Store Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chat-container {
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+        }
+        .user-input {
+            width: 100%;
+            padding: 10px;
+        }
+        .user-message, .bot-message {
+            margin: 5px;
+        }
+        .user-message {
+            text-align: right;
+        }
+        .bot-message {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        <input type="text" id="user-input" class="user-input" placeholder="Type your message here..." onkeydown="if(event.key === 'Enter'){ sendMessage(); }">
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("user-input").value;
+            document.getElementById("user-input").value = "";
+            var chatBox = document.getElementById("chat-box");
+
+            var userMessage = document.createElement("div");
+            userMessage.className = "user-message";
+            userMessage.innerText = userInput;
+            chatBox.appendChild(userMessage);
+
+            fetch(`/get?msg=${userInput}`)
+                .then(response => response.text())
+                .then(botResponse => {
+                    var botMessage = document.createElement("div");
+                    botMessage.className = "bot-message";
+                    botMessage.innerText = botResponse;
+                    chatBox.appendChild(botMessage);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                });
+        }
+    </script>
+</body>
+</html>
