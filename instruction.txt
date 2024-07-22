@@ -1,0 +1,21 @@
+Instructions on how to run the Wine Store Chatbot project.
+
+Ensure you have the following softwares and dependencies installed:
+- Python 3.7 or higher
+- pip (Python package installer)
+- Flask
+- nltk
+- numpy
+- tensorflow
+- keras
+
+Also Run
+    import nltk
+    nltk.download('punkt')
+    nltk.download('wordnet')
+
+Run files in following order
+    python train_chatbot.py
+    python chatbot.py
+    python app.py
+ Open your web browser and navigate to `http://127.0.0.1:5000/` to interact with the chatbot.
